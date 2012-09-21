@@ -9,17 +9,24 @@ public class Image {
 	private int hauteur;
 	private int largeur;
 	
+	/**
+	 * Constructeur.
+	 * Il stock l'image dans une matrice, à partir du fichier image
+	 * 
+	 * @param texte
+	 * @throws IOException
+	 */
+	
 	public Image(String texte) throws IOException {
-		// Lecture du fichier texte
+		// Lecture du fichier contenant l'image
 		Scanner scanner = new Scanner(new File(texte));
 
-		// Prise en compte d'une ligne
+		// Passage à la troisième ligne, on ignore les lignes inutiles
 		scanner.nextLine();
 		scanner.nextLine();
 		String ligne = scanner.nextLine();
 
-		// traitement de la ligne courante: decouper les mots separes par des
-		// delimiteurs
+		// lecture de la hauteur et de la largeur de l'image
 		String delimiteurs = " ";
 		StringTokenizer st = new StringTokenizer(ligne, delimiteurs);
 		String largeurstring = st.nextToken();
@@ -28,7 +35,8 @@ public class Image {
 		Integer hauteur = new Integer(hauteurstring);
 
 		int[][] Tableau = new int[largeur][hauteur];
-
+		
+		// Lecture des valeurs des pixels, et completion du tableau
 		for (int i = 0; i < hauteur; i++) {
 			for (int j = 0; j < largeur; j++) {
 				String line = scanner.nextLine();
@@ -39,12 +47,16 @@ public class Image {
 	}
 
 	
+	/**
+	 * Méthode d'affichage du tableau.
+	 * L'affichage se fait comme dans le ficher, à partir de la première valeur de pixel renseignée 
+	 */
+	
 	public void affiche(){
 		for (int i = 0; i < hauteur; i++) {
 			for (int j = 0; j <largeur; j++) {
 				System.out.println(this.Tableau[i][j]);;
 			}
-			System.out.println("/n");
 		}
 	}
 	
